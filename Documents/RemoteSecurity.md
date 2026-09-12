@@ -159,6 +159,7 @@ end
 ```
 
 However, exploiters have a trick up their sleeve called the "debug library" which is a collection of functions that allow them to do such things like viewing garbage collection, viewing the Lua registry, and viewing stack information.\
-This is why we can't stop the exploiter from getting the remote event because they could technically just search table/function upvalues in the Lua registry until they find a reference to the remote event.\
+This is why we can't stop the exploiter from getting the remote event because they could technically just search table/function upvalues in the Lua registry until they find a reference to the remote event.
+
 Fortunately, because the initial invoke to the server to generate the remote event requires a special key, all you would have to do is hide the remote event in use by using whatever method you choose to hide it (e.g., nested function environments).\
 This would ensure that the only way for the exploiter to get a useable remote event without spending hours searching for the remote in the Lua registry, they would need to decompile the local script and search through the code to find the special key so that they can generate a remote event for themself (which can be handled by simply obfuscating your local script—e.g., encoded nested hash tables, byte-to-char conversion math, etc.).
