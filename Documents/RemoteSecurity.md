@@ -31,7 +31,7 @@ At **runtime**, the game server compiles each script's source into bytecode usin
 The client's Luau virtual machine then calls an internal deserializer that: (1) parses the binary bytecode blob, (2) reconstructs prototype structures (e.g., instruction arrays, constants, upvalue metadata, etc.), (3) creates a closure wrapping the top-level prototype.\
 The virtual machine's interpreter loop then executes the instructions from the prototype's instruction array by reading/writing the register stack frame.
 
-The exploiter would use a "get_script_bytecode" function to get the precompiled bytecode inside the protected string (which as we know is accessible on the client) by: (1) locating the script object in DataModel, (2) finding the offset of the bytecode in the script class, (3) and finally, dereferencing that pointer to read the length-prefixed bytes.
+The exploiter would use a "get_script_bytecode" function to get the precompiled bytecode inside the protected string (which as we know is accessible on the client) by: (1) locating the script object in the data model, (2) finding the offset of the bytecode in the script class, (3) and finally, dereferencing that pointer to read the length-prefixed bytes.
 
 After obtaining the bytecode's raw bytes, the exploiter then decompiles this bytecode by: (1) breaking the raw bytes into a table of opcode instructions, (2) extracting the constants table (which stores strings, numbers, and import names), (3) mapping out the control flow graph (i.e., "JUMP" instructions) to find where conditionals start and end, (4) and finally, pattern matching common Luau idioms (e.g., a generic "for-loop" always uses specific registers).
 
