@@ -26,7 +26,7 @@ Below is a quick crash course on how exploiters create and use these methods.
 At **publish time**, the Roblox place file (e.g., "Place.rbxl") stores the script source as string properties.\
 There is also bytecode data type in the binary format, which stores the precompiled Luau bytecode (which is accessible to the game client).
 
-At **runtime**, the game server compiles each script's source into bytecode using the Luau compiler (which is only present on the server), and is replicated to the client as part of the data model repication stream (i.e., received over the network).
+At **runtime**, the game server compiles each script's source into bytecode using the Luau compiler (which is only present on the server), and is replicated to the client as part of the data model replication stream (i.e., received over the network).
 
 The client's Luau virtual machine then calls an internal deserializer that: (1) parses the binary bytecode blob, (2) reconstructs prototype structures (e.g., instruction arrays, constants, upvalue metadata, etc.), (3) creates a closure wrapping the top-level prototype.\
 The virtual machine's interpreter loop then executes the instructions from the prototype's instruction array by reading/writing the register stack frame.
